@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -109,7 +110,14 @@ public class CaptchaController {
 		HttpSession session = request.getSession(false);
 
 		Captcha captcha = (Captcha) session.getAttribute("simpleCaptcha");
-		String answer = request.getParameter("answer");
+		String answer;
+		
+		if(request.getParameter("answer") == null) {
+			return "Wrong!";
+		} else {
+			answer = request.getParameter("answer");
+		}
+		
 		if (captcha.isCorrect(answer)) {
 			return "Correct!";
 		} else {
