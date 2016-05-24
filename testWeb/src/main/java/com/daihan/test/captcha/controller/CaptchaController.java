@@ -44,7 +44,7 @@ public class CaptchaController {
 										.build();
 
 		request.getSession().setAttribute("simpleCaptcha", captcha);
-		logger.info(request.getSession().getAttribute("simpleCaptcha").toString());
+		// logger.info(request.getSession().getAttribute("simpleCaptcha").toString());
 		CaptchaServletUtil.writeImage(response, captcha.getImage());
 	}
 
