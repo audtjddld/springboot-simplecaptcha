@@ -62,12 +62,12 @@ public class CaptchaController {
 		HttpSession session = request.getSession(false);
 
 		Captcha captcha = (Captcha) session.getAttribute("simpleCaptcha");
-		CustomTextProducer ctp = new CustomTextProducer(captcha.getAnswer().toCharArray());
-		CustomNumberVoiceProducer cvp = new CustomNumberVoiceProducer(captcha.getAnswer().toCharArray(), "kr");
+		CustomTextProducer customTextProducer = new CustomTextProducer(captcha.getAnswer().toCharArray());
+		CustomNumberVoiceProducer customNumberVoiceProducer = new CustomNumberVoiceProducer(captcha.getAnswer().toCharArray(), "kr");
 
 		AudioCaptcha ac = new AudioCaptcha.Builder()
-											.addAnswer(ctp)
-											.addVoice(cvp)
+											.addAnswer(customTextProducer)
+											.addVoice(customNumberVoiceProducer)
 											.addNoise()
 											.build("kr");
 
